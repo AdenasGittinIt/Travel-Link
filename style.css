@@ -1,0 +1,27 @@
+body{
+    font-family: "Georgia", "Arial", sans-serif;
+    color: darkblue;
+}
+
+header {
+    margin-top: 3px;
+    margin-left: 3px;
+    text-align: center;
+
+}
+
+#h1 {
+        font-size: 30px;
+        border-style: solid;
+        border-color: black;
+    }
+
+#h2 {
+    font-size: 22px;
+}
+
+#h3 {
+    border-style: solid;
+    border-color: black;
+    font-size: 18px;
+}
