@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Travel Link</title>
+    <link rel="stylesheet" type="textcss" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1 id=h1>
+            Travel Link
+        </h1>
+        <h2 id=h2>
+            Not all who wander are lost.
+        </h2>
+</header>
+
+    <div id="search-inputs">
+        <h3 class=search>
+            Search:
+        </h3>
+        <form>
+            Arrival Date:
+            <input type="date" id = "arrival-date"><br>
+
+            Departure Date:
+            <input type="date" id = "departure-date"><br>
+
+            Zip code:
+            <input type="number" minlength="5" maxlength="5" id = "zipcode"><br>
+
+            Search
+            <input type="button" id="search-button" value="Search">
+
+            Clear Results
+            <input type="button" id="clear-button" value="Clear Results">
+        </form>
+    </div>
+
+    <div id="results">
+        <p1>
+            Weather:
+        </p1><br>
+
+        <p1>
+            Local Eats:
+        </p1><br>
+
+        <p1>
+            Entertainment:
+        </p1>
+    </div>
+
+    <div id="itinerary">
+        <p1>
+            Itinerary:
+        </p1>
+    </div>
+
+<script src="/assets/script.js"></script>
+</body>
+</html>
