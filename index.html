@@ -5,38 +5,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Travel Link</title>
-    <link rel="stylesheet" type="textcss" href="style.css">
+    <link rel="stylesheet" href="style.css">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://kit.fontawesome.com/8ce1e63b1f.js" crossorigin="anonymous"></script>
+
+       <title>TraveLink</title>     
 </head>
+    
+<nav>
+        <div class="nav-wrapper cyan lighten-3">
+          <a href="#" class="brand-logo center">TraveLink</a>
+          <ul id="nav-mobile" class="left hide-on-med-and-down">
+            <li><a href="sass.html"><i class="fas fa-plane"></i>
+
+            </a></li>
+            
+          </ul>
+        </div>
+      </nav>
 <body>
 
-    <header>
-        <h1 id=h1>
-            Travel Link
-        </h1>
-        <h2 id=h2>
-            Not all who wander are lost.
-        </h2>
-</header>
+    
 
     <div id="search-inputs">
-        <h3 class=search>
-            Search:
+        <h3 class="oneline">
+            
         </h3>
         <form>
+            <div class= "oneline">
+
             Arrival Date:
             <input type="date" id = "arrival-date"><br>
-
+            </div>
+            <div class= "oneline">
             Departure Date:
             <input type="date" id = "departure-date"><br>
-
+                
+            </div>
+            <div class= "oneline">
             Zip code:
             <input type="number" minlength="5" maxlength="5" id = "zipcode"><br>
-
-            Search
+            </div>
+            
             <input type="button" id="search-button" value="Search">
-
-            Clear Results
+            <div class= "oneline">
+            
             <input type="button" id="clear-button" value="Clear Results">
+            </div>
         </form>
     </div>
 
