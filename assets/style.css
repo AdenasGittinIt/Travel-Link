@@ -1,27 +1,39 @@
-body{
-    font-family: "Georgia", "Arial", sans-serif;
-    color: darkblue;
-}
+html {
+    background-image: url("https://static9.depositphotos.com/1441191/1196/v/950/depositphotos_11961483-stock-illustration-travel-background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: "Roboto";
+  }
 
-header {
-    margin-top: 3px;
-    margin-left: 3px;
-    text-align: center;
+  .oneline {
+      color:black;
+      display: inline-block
+      }
 
-}
-
-#h1 {
-        font-size: 30px;
+      body{
+        font-family: "Georgia", "Arial", sans-serif;
+        color: darkblue;
+    }
+    
+    header {
+        margin-top: 3px;
+        margin-left: 3px;
+        text-align: center;
+    
+    }
+    
+    #h1 {
+            font-size: 30px;
+            border-style: solid;
+            border-color: black;
+        }
+    
+    #h2 {
+        font-size: 22px;
+    }
+    
+    #h3 {
         border-style: solid;
         border-color: black;
+        font-size: 18px;
     }
-
-#h2 {
-    font-size: 22px;
-}
-
-#h3 {
-    border-style: solid;
-    border-color: black;
-    font-size: 18px;
-}
