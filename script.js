@@ -1,3 +1,4 @@
+
 //Take user imput of date (Confirm that API keys can search by date and the format required)
   //future dev... date range
 
@@ -17,4 +18,5 @@
   //"don't forget to check the weather" if it's an outdoor event
   //"that looks fun" for another envet
   //"you have great taste in music" for a musical event
+
 
