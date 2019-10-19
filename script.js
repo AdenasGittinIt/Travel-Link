@@ -5,6 +5,37 @@
 //onclick function that captures the user input and inserts it into the API request URL
 
 //AJAX function to send the request 
+$("#search-button").on("click", function() {
+  event.preventDefault();
+
+  var searchTerm = $("#search-term").val().trim();
+  var startYear = $("#start-year").val().trim();
+  var endYear = $("#end-year").val().trim();
+
+  var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q={city name},{country code}" + searchTerm + "&api-key=3YShtKHlvcwNQDMRaoLiiGvLEBYmdOqL";
+  
+  $.ajax({
+    url: queryURL,
+    method: "GET"
+
+  }).then(function(response) {
+    console.log(response.response.docs[0].web_url);
+    var link = response.response.docs[0].web_url;
+    var newDiv = $("<a>").attr("href", link).text(link);
+
+     $("#results").append(newDiv); 
+      
+
+    // Append the td elements to the new table row
+    // Append the table row to the tbody element
+  });
+
+
+
+
+
+
+
 
 //Get the results back from the API
 
