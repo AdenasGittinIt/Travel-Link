@@ -1,34 +1,45 @@
 
+
 //Take user imput of date (Confirm that API keys can search by date and the format required)
   //future dev... date range
 
 //onclick function that captures the user input and inserts it into the API request URL
-
 //AJAX function to send the request 
-$("#search-button").on("click", function() {
+$("#search-button").on('click', function () {
   event.preventDefault();
+  console.log("button was clicked");
+  var zipCode = $('#zipcode').val();
+  console.log(zipCode);
 
-  var searchTerm = $("#search-term").val().trim();
-  var startYear = $("#start-year").val().trim();
-  var endYear = $("#end-year").val().trim();
+  var weatherURL = "https://api.openweathermap.org/data/2.5/forecast?zip=" + zipCode + ",us&appid=00604984263164d160d696afed305b97";
 
-  var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q={city name},{country code}" + searchTerm + "&api-key=3YShtKHlvcwNQDMRaoLiiGvLEBYmdOqL";
-  
-  $.ajax({
-    url: queryURL,
+// Here we run our AJAX call to the OpenWeatherMap API
+$.ajax({
+    url: weatherURL,
     method: "GET"
+}).then(function (response) {
+    // We store all of the retrieved data inside of an object called "response"
+        // Log the queryURL
+        console.log(weatherURL);
+        // Log the resulting object
+        console.log(response);
+        // Transfer content to HTML
+        // City
+        // Temp on desired day of travel
+    //     console.log("Wind Speed: " + response.wind.speed);
+    //     console.log("Humidity: " + response.main.humidity);
+    //     console.log("Temperature (F): " + response.main.temp);
+    });
 
-  }).then(function(response) {
-    console.log(response.response.docs[0].web_url);
-    var link = response.response.docs[0].web_url;
-    var newDiv = $("<a>").attr("href", link).text(link);
-
-     $("#results").append(newDiv); 
-      
-
-    // Append the td elements to the new table row
-    // Append the table row to the tbody element
-  });
+  // $.ajax({
+  //   url: queryURL1,
+  //   method: "GET"
+  // }).then(function (response) {
+  //   console.log("forecast URL: " + queryURL1);
+  //   console.log("response 2: " + response);
+  //   console.log("temperature: " + response.list[0].main.temp);
+  // });
+});
 
 
 
@@ -48,6 +59,4 @@ $("#search-button").on("click", function() {
   //"that looks delicious" for a restaurangt
   //"don't forget to check the weather" if it's an outdoor event
   //"that looks fun" for another envet
-  //"you have great taste in music" for a musical event
-
-
+  //"you have great taste in music" for a 
