@@ -10,43 +10,35 @@ $("#search-button").on('click', function () {
   var zipCode = $('#zipcode').val().trim();
   var weatherURL = "https://api.openweathermap.org/data/2.5/forecast?zip=" + zipCode + ",us&units=imperial&appid=00604984263164d160d696afed305b97";
 
-// Here we run our AJAX call to the OpenWeatherMap API
-$.ajax({
+  $.ajax({
     url: weatherURL,
     method: "GET"
-}).then(function (response) {
-    // We store all of the retrieved data inside of an object called "response"
-        let currentTemp = response.list[0].main.temp;
-        console.log(response);
-        $("#weather").text("Weather: " + currentTemp);
+  }).then(function (response) {
+    console.log(response);    
+    let currentTemp = response.list[0].main.temp;
+  
+    $("#weather").text("Weather: " + currentTemp);
 
-        if (response.list[0].weather[0].main === "Clouds") {
-          console.log("Where's the sun?");
-        }
+    if (response.list[0].weather[0].main === "Clouds") {
+      console.log("Where's the sun?");
+    }
+  });
 
-   
-        // City
-        // Temp on desired day of travel
-    //     console.log("Wind Speed: " + response.wind.speed);
-    //     console.log("Humidity: " + response.main.humidity);
-    //     console.log("Temperature (F): " + response.main.temp);
-    });
-
-  // $.ajax({
-  //   url: queryURL1,
-  //   method: "GET"
-  // }).then(function (response) {
-  //   console.log("forecast URL: " + queryURL1);
-  //   console.log("response 2: " + response);
-  //   console.log("temperature: " + response.list[0].main.temp);
-  // });
+  $.ajax({
+    type:"GET",
+    url:"https://cors-anywhere.herokuapp.com/https://app.ticketmaster.com/discovery/v2/events.json?size=1&apikey=3lnAM350kKFnvBTJoQKYZc9ksm0IPfOY",
+    async:true,
+    dataType: "json",
+    success: function(json) {
+                console.log(json);
+                // Parse the response.
+                // Do other things.
+             },
+    error: function(xhr, status, err) {
+                // This time, we do not end up here!
+             }
+  });
 });
-
-
-
-
-
-
 
 
 //Get the results back from the API
