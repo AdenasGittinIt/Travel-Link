@@ -26,7 +26,7 @@ $("#search-button").on('click', function () {
 
   $.ajax({
     type:"GET",
-    url:"https://cors-anywhere.herokuapp.com/https://app.ticketmaster.com/discovery/v2/events.json?size=1&apikey=3lnAM350kKFnvBTJoQKYZc9ksm0IPfOY",
+    url:"https://cors-anywhere.herokuapp.com/https://app.ticketmaster.com/discovery/v2/events.json?size=1&postalCode=" + zipCode + "&apikey=3lnAM350kKFnvBTJoQKYZc9ksm0IPfOY",
     async:true,
     dataType: "json",
     success: function(json) {
