@@ -7,11 +7,8 @@
 //AJAX function to send the request 
 $("#search-button").on('click', function () {
   event.preventDefault();
-  console.log("button was clicked");
-  var zipCode = $('#zipcode').val();
-  console.log(zipCode);
-
-  var weatherURL = "https://api.openweathermap.org/data/2.5/forecast?zip=" + zipCode + ",us&appid=00604984263164d160d696afed305b97";
+  var zipCode = $('#zipcode').val().trim();
+  var weatherURL = "https://api.openweathermap.org/data/2.5/forecast?zip=" + zipCode + ",us&units=imperial&appid=00604984263164d160d696afed305b97";
 
 // Here we run our AJAX call to the OpenWeatherMap API
 $.ajax({
@@ -19,11 +16,15 @@ $.ajax({
     method: "GET"
 }).then(function (response) {
     // We store all of the retrieved data inside of an object called "response"
-        // Log the queryURL
-        console.log(weatherURL);
-        // Log the resulting object
+        let currentTemp = response.list[0].main.temp;
         console.log(response);
-        // Transfer content to HTML
+        $("#weather").text("Weather: " + currentTemp);
+
+        if (response.list[0].weather[0].main === "Clouds") {
+          console.log("Where's the sun?");
+        }
+
+   
         // City
         // Temp on desired day of travel
     //     console.log("Wind Speed: " + response.wind.speed);
