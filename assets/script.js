@@ -5,32 +5,28 @@
 //onclick function that captures the user input and inserts it into the API request URL
 
 //AJAX function to send the request 
-$("#search-button").on("click", function() {
-  event.preventDefault();
+$("#search-button").on("click", function () {
+    event.preventDefault();
 
-  var searchTerm = $("#search-term").val().trim();
-  var startYear = $("#start-year").val().trim();
-  var endYear = $("#end-year").val().trim();
+    var location = $("#zipcode").val().trim();
+    var APIrestKey = "8f8ab57d29msh63cc59e803ae456p1ed3e0jsnfc15d00e1331";
+    var hostAPI = "us-restaurant-menus.p.rapidapi.com";
+    var queryURLrest = "https://us-restaurant-menus.p.rapidapi.com/restaurants/zip_code/90210?page=1" + location + APIrestKey + hostAPI;
 
-  var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q={city name},{country code}" + searchTerm + "&api-key=3YShtKHlvcwNQDMRaoLiiGvLEBYmdOqL";
-  
   $.ajax({
-    url: queryURL,
+    url: queryURLrest,
     method: "GET"
+  })
 
-  }).then(function(response) {
-    console.log(response.response.docs[0].web_url);
-    var link = response.response.docs[0].web_url;
-    var newDiv = $("<a>").attr("href", link).text(link);
+  .then(function (response){
+    console.log(queryURLrest);
+    console.log(response);
+    var restList = responst.list[0];
+    $("#localEats").text("Local Eats:" + restList)
+  })  
+  
 
-     $("#results").append(newDiv); 
-      
-
-    // Append the td elements to the new table row
-    // Append the table row to the tbody element
-  });
-
-
+});
 
 
 
@@ -49,5 +45,4 @@ $("#search-button").on("click", function() {
   //"don't forget to check the weather" if it's an outdoor event
   //"that looks fun" for another envet
   //"you have great taste in music" for a musical event
-
 
