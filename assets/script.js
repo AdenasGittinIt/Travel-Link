@@ -9,28 +9,42 @@ $("#search-button").on('click', function () {
   event.preventDefault();
   var zipCode = $('#zipcode').val().trim();
   var weatherURL = "https://api.openweathermap.org/data/2.5/forecast?zip=" + zipCode + ",us&units=imperial&appid=00604984263164d160d696afed305b97";
+  var startDate = $('#arrival-date').val().trim();
+  console.log(startDate);
+  var endDate = $('#departure-date').val().trim();
 
   $.ajax({
     url: weatherURL,
     method: "GET"
   }).then(function (response) {
-    console.log(response);    
-    let currentTemp = response.list[0].main.temp;
+    // console.log(response);    
+    var currentTemp = response.list[0].main.temp;
   
-    $("#weather").text("Weather: " + currentTemp);
+    $("#weather").text("Weather: " + currentTemp +"°");
 
-    if (response.list[0].weather[0].main === "Clouds") {
-      console.log("Where's the sun?");
-    }
+    // if (response.list[0].weather[0].main === "Clouds") {
+    //   console.log("Where's the sun?");
+    // }
   });
 
   $.ajax({
     type:"GET",
-    url:"https://cors-anywhere.herokuapp.com/https://app.ticketmaster.com/discovery/v2/events.json?size=1&postalCode=" + zipCode + "&apikey=3lnAM350kKFnvBTJoQKYZc9ksm0IPfOY",
+    url:"https://cors-anywhere.herokuapp.com/https://app.ticketmaster.com/discovery/v2/events.jason?postalCode=" + zipCode + "&radius=30&unit=miles&locale=*&startDateTime=" + startDate + "T00:00:00Z&endDateTime=" + endDate + "T00:00:00Z&includeTBA=yes&includeTBD=yes&sort=date,name,asc&source=%20tmr&source=%20frontgate&source=%20universe&source=ticketmaster&apikey=3lnAM350kKFnvBTJoQKYZc9ksm0IPfOY",
+
     async:true,
     dataType: "json",
-    success: function(json) {
-                console.log(json);
+    success: function(response) {
+      console.log(response);
+      var event = response._embedded.events[0].name
+      var eventDate = response._embedded.events[0].dates.start.localDate
+      var eventTime = response._embedded.events[0].dates.start.localTime
+      var eventImageUrl = response._embedded.events[0].images[0].url
+      var newImage = $("<img>").attr("src", eventImageUrl);
+      //if ratio === whatever ratio apend to the page and exit loop else continue the loop until a ratio is matched
+      console.log(eventImageUrl);
+      $("#events").text("Entertainment: " + event + " " + eventDate +" "+eventTime)
+      $("#events").append(newImage); 
+     
                 // Parse the response.
                 // Do other things.
              },
