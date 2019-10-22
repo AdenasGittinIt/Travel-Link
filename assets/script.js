@@ -53,13 +53,20 @@ $("#search-button").on('click', function () {
         var foundImage = filteredEvents[i].images.find(function(image) {
           return image.ratio === "3_2";
         });
-        var eventImageUrl = foundImage.url
+
+        var eventImageUrl = foundImage.url;
+
+        var newLink = $("<a>").attr({
+          href: filteredEvents[i].url,
+          target: "_blank"});
+
         var newImage = $("<img>").attr("src", eventImageUrl);
         newImage.css("width", "300px")
-        var newDiv = $("<div>").attr("id", "results"+i)
-        // $("#events").text("Entertainment: " + event + " " + eventDate +" "+eventTime)
+        var newDiv = $("<div>").attr("id", "results-"+i)
+
         newDiv.append(event + " " + eventDate +" "+eventTime);
-        newDiv.append(newImage);
+        newDiv.append(newLink);
+        newLink.append(newImage);
         $("#events").append(newDiv); 
       }
 
