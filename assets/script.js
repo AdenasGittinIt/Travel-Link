@@ -9,18 +9,18 @@ $("#search-button").on('click', function () {
   console.log(startDate);
   var endDate = $('#departure-date').val().trim();
 
-// This is the API call from Open Weather
+    // This is the API call from Open Weather
   $.ajax({
     url: weatherURL,
     method: "GET"
   }).then(function (response) {
     // console.log(response);    
     var currentTemp = response.list[0].main.temp;
-    // here the current temperature is added to the page
+    // The current temperature is added to the page
     $("#weather").text("Weather: " + currentTemp +"°");
   });
 
-  //This is the API call from TicketMaster
+    //This is the API call from TicketMaster
   $.ajax({
     type:"GET",
     url:"https://cors-anywhere.herokuapp.com/https://app.ticketmaster.com/discovery/v2/events.jason?postalCode=" + zipCode + "&radius=30&unit=miles&locale=*&startDateTime=" + startDate + "T00:00:00Z&endDateTime=" + endDate + "T12:00:00Z&includeTBA=yes&includeTBD=yes&sort=date,name,asc&source=%20tmr&source=%20frontgate&source=%20universe&source=ticketmaster&apikey=3lnAM350kKFnvBTJoQKYZc9ksm0IPfOY",
@@ -28,7 +28,7 @@ $("#search-button").on('click', function () {
     async:true,
     dataType: "json",
     success: function(response) {
-      // Here I'm filtering the envents by event name so that if the API returns an event with the same name, it get's excluded from the eventNames array
+      // Filtering the envents by event name so that if the API returns an event with the same name, it get's excluded from the eventNames array
       var eventNames = [];
       var filteredEvents = response._embedded.events.filter(function(event){
         if(eventNames.includes(event.name)) {
@@ -39,7 +39,7 @@ $("#search-button").on('click', function () {
         }
       });
       console.log(filteredEvents);
-      // Here we loop through the filteredEvents to get start date, time event name and image
+        // Looping through the filteredEvents to get start date, time, event name and image.  Returning at max, 5 results.
       for(i = 0; i < 5; i++) {
         var event = filteredEvents[i].name
         var eventDate = filteredEvents[i].dates.start.localDate
@@ -47,7 +47,7 @@ $("#search-button").on('click', function () {
         var foundImage = filteredEvents[i].images.find(function(image) {
           return image.ratio === "3_2";
         });
-        // Here I'm creating new HTML elements with my serch results and adding them to the page
+        // Creating new HTML elements with my serch results and adding them to the page
         // I need to make additions/changes so that each result has a check box next to it
         var eventImageUrl = foundImage.url;
         var newLink = $("<a>").attr({
@@ -64,7 +64,7 @@ $("#search-button").on('click', function () {
       }
              },
       error: function(xhr, status, err) {
-                // This time, we do not end up here!
+                // This time, we do not end up here! 
              }
   });
 });
