@@ -34,19 +34,35 @@ $("#search-button").on('click', function () {
     async:true,
     dataType: "json",
     success: function(response) {
-      console.log(response);
-      var event = response._embedded.events[0].name
-      var eventDate = response._embedded.events[0].dates.start.localDate
-      var eventTime = response._embedded.events[0].dates.start.localTime
-      var eventImageUrl = response._embedded.events[0].images[0].url
-      var newImage = $("<img>").attr("src", eventImageUrl);
-      //if ratio === whatever ratio apend to the page and exit loop else continue the loop until a ratio is matched
-      console.log(eventImageUrl);
-      $("#events").text("Entertainment: " + event + " " + eventDate +" "+eventTime)
-      $("#events").append(newImage); 
-     
-                // Parse the response.
-                // Do other things.
+      // console.log(response);
+      var eventNames = [];
+      var filteredEvents = response._embedded.events.filter(function(event){
+        if(eventNames.includes(event.name)) {
+          return false 
+        } else {
+          eventNames.push(event.name);
+          return true 
+        }
+      });
+      console.log(filteredEvents);
+
+      for(i = 0; i < 5; i++) {
+        var event = filteredEvents[i].name
+        var eventDate = filteredEvents[i].dates.start.localDate
+        var eventTime = filteredEvents[i].dates.start.localTime
+        var foundImage = filteredEvents[i].images.find(function(image) {
+          return image.ratio === "3_2";
+        });
+        var eventImageUrl = foundImage.url
+        var newImage = $("<img>").attr("src", eventImageUrl);
+        newImage.css("width", "300px")
+        var newDiv = $("<div>").attr("id", "results"+i)
+        // $("#events").text("Entertainment: " + event + " " + eventDate +" "+eventTime)
+        newDiv.append(event + " " + eventDate +" "+eventTime);
+        newDiv.append(newImage);
+        $("#events").append(newDiv); 
+      }
+
              },
     error: function(xhr, status, err) {
                 // This time, we do not end up here!
