@@ -18,8 +18,9 @@ $("#search-button").on('click', function () {
     var currentTemp = response.list[0].main.temp;
     // The current temperature is added to the page
     $("#weather").text("Weather: " + currentTemp +"°");
+    console.log(response);
   });
-
+    
     //This is the API call from TicketMaster
   $.ajax({
     type:"GET",
@@ -67,6 +68,24 @@ $("#search-button").on('click', function () {
                 // This time, we do not end up here! 
              }
   });
+
+  var zipCode = $('#zipcode').val().trim();
+  var weatherURL = "https://api.openweathermap.org/data/2.5/forecast?zip=" + zipCode + ",us&units=imperial&appid=00604984263164d160d696afed305b97";
+  var startDate = $('#arrival-date').val().trim();
+  console.log(startDate);
+  var endDate = $('#departure-date').val().trim();
+
+    // This is the API call from Open Weather
+  $.ajax({
+    url: weatherURL,
+    method: "GET"
+  }).then(function (response) {
+    // console.log(response);    
+    var currentTemp = response.list[0].main.temp;
+    // The current temperature is added to the page
+    $("#weather").text("Weather: " + currentTemp +"°");
+  });
+  
 });
 
   
