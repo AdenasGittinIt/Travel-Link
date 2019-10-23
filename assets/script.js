@@ -67,6 +67,30 @@ $("#search-button").on('click', function () {
                 // This time, we do not end up here! 
              }
   });
+
+  var citySearch = $("#zipcode").val().trim();
+  var APIrestKey = "f9a5acdea9259dd8ef4a0a2a9868c19a";
+  var URLrest = "http://developers.zomato.com/api/v2.1/search?entity_id=" + citySearch + "&entity_type=city" + APIrestKey;
+
+  $.ajax({
+    type: "GET",
+    url = URLrest,
+    
+  async:true,
+  dataType: "json",
+  success: function(response) {
+    // Filtering the envents by event name so that if the API returns an event with the same name, it get's excluded from the eventNames array
+    var restNames = [];
+    var filteredRest = response._embedded.restNames.filter(function(rest){
+      if(restNames.includes(rest.name)) {
+        return false 
+      } else {
+        restNames.push(rest.name);
+        return true
+      }
+    });
+  });
+  //curl -X GET --header "Accept: application/json" --header "user-key: f9a5acdea9259dd8ef4a0a2a9868c19a" "https://developers.zomato.com/api/v2.1/search?entity_id=Broomfield&entity_type=city"
 });
 
   $(".itineraryButtonEvents").on("click", function (){
