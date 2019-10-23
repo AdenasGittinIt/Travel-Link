@@ -4,16 +4,17 @@
 $("#search-button").on('click', function () {
   event.preventDefault();
   var zipCode = $('#zipcode').val().trim();
-  var weatherURL = "https://api.openweathermap.org/data/2.5/forecast?zip=" + zipCode + ",us&units=imperial&appid=00604984263164d160d696afed305b97";
+  var weatherURL = "https://api.openweathermap.org/data/2.5/forecast?city=" + zipCode + ",us&units=imperial&appid=00604984263164d160d696afed305b97";
   var startDate = $('#arrival-date').val().trim();
-  console.log(startDate);
+  //console.log(startDate);
   var endDate = $('#departure-date').val().trim();
 
     // This is the API call from Open Weather
   $.ajax({
     url: weatherURL,
     method: "GET"
-  }).then(function (response) {
+  })
+  .then(function (response) {
     // console.log(response);    
     var currentTemp = response.list[0].main.temp;
     // The current temperature is added to the page
@@ -30,15 +31,16 @@ $("#search-button").on('click', function () {
     success: function(response) {
       // Filtering the envents by event name so that if the API returns an event with the same name, it get's excluded from the eventNames array
       var eventNames = [];
-      var filteredEvents = response._embedded.events.filter(function(event){
+      var filteredEvents = response._embedded.events.filter(function(event) {
         if(eventNames.includes(event.name)) {
           return false 
-        } else {
+          } 
+        else {
           eventNames.push(event.name);
           return true 
-        }
+         }
       });
-      console.log(filteredEvents);
+      //console.log(filteredEvents);
         // Looping through the filteredEvents to get start date, time, event name and image.  Returning at max, 5 results.
       for(i = 0; i < 5; i++) {
         var event = filteredEvents[i].name
@@ -48,7 +50,6 @@ $("#search-button").on('click', function () {
           return image.ratio === "3_2";
         });
         // Creating new HTML elements with my serch results and adding them to the page
-        // I need to make additions/changes so that each result has a check box next to it
         var eventImageUrl = foundImage.url;
         var newLink = $("<a>").attr({
           href: filteredEvents[i].url,
@@ -65,33 +66,48 @@ $("#search-button").on('click', function () {
              },
       error: function(xhr, status, err) {
                 // This time, we do not end up here! 
-             }
-  });
+            }
+  });  
 
   var citySearch = $("#zipcode").val().trim();
-  var APIrestKey = "f9a5acdea9259dd8ef4a0a2a9868c19a";
-  var URLrest = "http://developers.zomato.com/api/v2.1/search?entity_id=" + citySearch + "&entity_type=city" + APIrestKey;
+  //var APIrestKey = "f9a5acdea9259dd8ef4a0a2a9868c19a";
+  //var URLrest = "http://developers.zomato.com/api/v2.1/search?entity_id=" + citySearch + "&entity_type=city&apikey=f9a5acdea9259dd8ef4a0a2a9868c19a",
 
   $.ajax({
-    type: "GET",
-    url = URLrest,
-    
-  async:true,
-  dataType: "json",
-  success: function(response) {
-    // Filtering the envents by event name so that if the API returns an event with the same name, it get's excluded from the eventNames array
-    var restNames = [];
-    var filteredRest = response._embedded.restNames.filter(function(rest){
-      if(restNames.includes(rest.name)) {
-        return false 
-      } else {
-        restNames.push(rest.name);
-        return true
+    method:"GET",
+    crossDomain: true,
+    url: "http://developers.zomato.com/api/v2.1/search?entity_id=" + citySearch + "&entity_type=city",
+    dataType : "json",
+    asynd: true,
+    headers: {
+      "user-key": "f9a5acdea9259dd8ef4a0a2a9868c19a"
+    },
+    success: function(data) {
+        var Eats = [];
+        var restName = response._embedded.restaurant.name(function(event) {
+         if(restName.includes(restaurant.name)) {
+          return false 
+           } 
+          else {
+          eventNames.push(event.name);
+          return true 
+         };
+
+       for(var i = 0; i < 5; i++) {
+        var newDiv = $("<div>").attr("id", "results-"+i)
+         results = restName[i].name;
+           $("#localEats").append(newDiv);
+        }
+      })
+    },
+
+      error: function(xhr, status, err) {
+      // This time, we do not end up here! 
       }
-    });
-  });
-  //curl -X GET --header "Accept: application/json" --header "user-key: f9a5acdea9259dd8ef4a0a2a9868c19a" "https://developers.zomato.com/api/v2.1/search?entity_id=Broomfield&entity_type=city"
+   }),
+
 });
+  //curl -X GET --header "Accept: application/json" --header "user-key: f9a5acdea9259dd8ef4a0a2a9868c19a" "https://developers.zomato.com/api/v2.1/search?entity_id=Broomfield&entity_type=city"
 
   $(".itineraryButtonEvents").on("click", function (){
     var data =  $(this).data();
