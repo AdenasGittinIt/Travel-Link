@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Travel Link</title>
-    <link rel="stylesheet" href="assets/style.css"/>
+    <title>TraveLink</title>
+    <link rel="stylesheet" href="assets/style.css" />
     <!-- Compiled and minified CSS -->
     <link
       rel="stylesheet"
@@ -13,11 +13,7 @@
     />
 
     <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script
-      src="https://kit.fontawesome.com/8ce1e63b1f.js"
-      crossorigin="anonymous"
-    ></script>
+
 
     <title>TraveLink</title>
   </head>
@@ -46,10 +42,10 @@
         </div>
         <div class="oneline">
           Zip code:
-          <input type="number" minlength="5" maxlength="5" id="zipcode" /><br />
+          <input  minlength="5" maxlength="5" id="zipcode" /><br />
         </div>
 
-        <input type="button" id="search-button" value="Search" />
+        <input type="button" id="search-button" value="Search"/>
         <div class="oneline">
           <input type="button" id="clear-button" value="Clear Results" />
         </div>
@@ -71,7 +67,7 @@
       </div>
     </div>
     <div id="results">
-      <p1>
+      <p1 id="weather">
         Weather: </p1
       ><br />
 
@@ -79,9 +75,9 @@
         Local Eats: </p1
       ><br />
 
-      <p1>
+      <div id="events">
         Entertainment:
-      </p1>
+      </div>
     </div>
 
     <div id="itinerary">
@@ -89,7 +85,9 @@
         Itinerary:
       </p1>
     </div>
-
-    <script src="/assets/script.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> -->
+    <script src="https://kit.fontawesome.com/8ce1e63b1f.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="assets/script.js"></script>
   </body>
 </html>
