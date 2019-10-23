@@ -1,13 +1,51 @@
-html {
+body {
     background-image: url("https://static9.depositphotos.com/1441191/1196/v/950/depositphotos_11961483-stock-illustration-travel-background.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     font-family: "Roboto";
+   
+
   }
 
-  .oneline {
+.oneline {
       color:black;
       display: inline-block
+<<<<<<< HEAD
       }
 
       
+=======
+      
+    }
+
+form {
+    text-align: center;
+    font-size: 20px;
+    background: rgb(128, 222, 234,.4);
+
+
+
+}
+
+#logo {
+    font-size: 50px;
+}
+
+.row {
+    text-align: center;
+    margin: auto;
+    width: 85%;
+    padding: 10px;
+    color: #80deea;
+    
+   
+}
+
+#box {
+    background: rgb(128, 222, 234,.8);
+    
+    
+}
+
+ 
+>>>>>>> origin
