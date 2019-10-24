@@ -59,7 +59,9 @@ $("#search-button").on('click', function () {
         var newImage = $("<img>").attr("src", eventImageUrl);
         var newDiv = $("<div>").attr("data-box", "box"+(i+5));
         newImage.css("width", "300px")
-        newDiv.append(event + " " + eventDate);
+        var newTextSpan = $("<span>").css({display:"block", color: "black"});
+        newTextSpan.text(event + " " + eventDate)
+        newDiv.append(newTextSpan);
         newDiv.append(newLink);
         newLink.append(newImage);
         $("#box"+(i+5)).replaceWith(newDiv); 
