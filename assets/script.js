@@ -3,7 +3,7 @@
 // This is the on click event that gets search results from our three APIs
 $("#search-button").on('click', function () {
   event.preventDefault();
-  var city = $('#city').val().trim();
+  var city = $('#city').val().trim().toLowerCase();
   var weatherURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + ",us&units=imperial&appid=00604984263164d160d696afed305b97";
   var startDate = $('#arrival-date').val().trim();
   console.log(startDate);
