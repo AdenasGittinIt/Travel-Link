@@ -3,7 +3,7 @@
 // This is the on click event that gets search results from our three APIs
 $("#search-button").on('click', function () {
   event.preventDefault();
-  var city = $('#city').val().trim();
+  var city = $('#city').val().trim().toLowerCase();
   var weatherURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + ",us&units=imperial&appid=00604984263164d160d696afed305b97";
   var startDate = $('#arrival-date').val().trim();
   console.log(startDate);
@@ -16,8 +16,10 @@ $("#search-button").on('click', function () {
   }).then(function (response) {
     // console.log(response);    
     var currentTemp = response.list[0].main.temp;
+    var currentConditions = response.list[0].weather[0].main;
     // The current temperature is added to the page
-    $("#weather").text("Weather: " + currentTemp +"°");
+    $("#temp").html("Current Temperature: " + currentTemp +"°");
+    $("#conditions").html("Current Conditions: " + currentConditions);
     console.log(response);
   });
     
@@ -55,9 +57,9 @@ $("#search-button").on('click', function () {
           href: filteredEvents[i].url,
           target: "_blank"});
         var newImage = $("<img>").attr("src", eventImageUrl);
-        var newDiv = $("<div>").attr("id", "results-"+i)
+        var newDiv = $("<div>").attr("data-box", "box"+(i+5));
         newImage.css("width", "300px")
-        newDiv.append(event + " " + eventDate +" "+eventTime);
+        newDiv.append(event + " " + eventDate);
         newDiv.append(newLink);
         newLink.append(newImage);
         $("#box"+(i+5)).replaceWith(newDiv); 
@@ -70,13 +72,13 @@ $("#search-button").on('click', function () {
   
 });
 
-  $(".itineraryButtonEvents").on("click", function (){
+  $(".itineraryButtonEvents").on("click",function() {
     var data =  $(this).data();
     var event = filteredEvents[data.index];
     console.log(event);
-    var newDiv = $("<div>").text(event.name);
-    $("#iten-box").append(newDiv);
-  })
+    var itinDiv = $("<div>").text(event.name);
+    $("#itin-box").append(itinDiv);
+  });
 
   //$(".itineraryButtonEats").on("click", function (){
     //var data =  $(this).data();
