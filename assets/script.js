@@ -3,8 +3,8 @@
 // This is the on click event that gets search results from our three APIs
 $("#search-button").on('click', function () {
   event.preventDefault();
-  var zipCode = $('#zipcode').val().trim();
-  var weatherURL = "https://api.openweathermap.org/data/2.5/forecast?zip=" + zipCode + ",us&units=imperial&appid=00604984263164d160d696afed305b97";
+  var city = $('#city').val().trim();
+  var weatherURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + ",us&units=imperial&appid=00604984263164d160d696afed305b97";
   var startDate = $('#arrival-date').val().trim();
   console.log(startDate);
   var endDate = $('#departure-date').val().trim();
@@ -18,12 +18,13 @@ $("#search-button").on('click', function () {
     var currentTemp = response.list[0].main.temp;
     // The current temperature is added to the page
     $("#weather").text("Weather: " + currentTemp +"°");
+    console.log(response);
   });
-
+    
     //This is the API call from TicketMaster
   $.ajax({
     type:"GET",
-    url:"https://cors-anywhere.herokuapp.com/https://app.ticketmaster.com/discovery/v2/events.jason?postalCode=" + zipCode + "&radius=30&unit=miles&locale=*&startDateTime=" + startDate + "T00:00:00Z&endDateTime=" + endDate + "T12:00:00Z&includeTBA=yes&includeTBD=yes&sort=date,name,asc&source=%20tmr&source=%20frontgate&source=%20universe&source=ticketmaster&apikey=3lnAM350kKFnvBTJoQKYZc9ksm0IPfOY",
+    url:"https://cors-anywhere.herokuapp.com/https://app.ticketmaster.com/discovery/v2/events.jason?city=" + city + "&radius=30&unit=miles&locale=*&startDateTime=" + startDate + "T00:00:00Z&endDateTime=" + endDate + "T12:00:00Z&includeTBA=yes&includeTBD=yes&sort=date,name,asc&source=%20tmr&source=%20frontgate&source=%20universe&source=ticketmaster&apikey=3lnAM350kKFnvBTJoQKYZc9ksm0IPfOY",
 
     async:true,
     dataType: "json",
@@ -47,7 +48,7 @@ $("#search-button").on('click', function () {
         var foundImage = filteredEvents[i].images.find(function(image) {
           return image.ratio === "3_2";
         });
-        // Creating new HTML elements with my serch results and adding them to the page
+        // Creating new HTML elements with my seaxrch results and adding them to the page
         // I need to make additions/changes so that each result has a check box next to it
         var eventImageUrl = foundImage.url;
         var newLink = $("<a>").attr({
@@ -55,18 +56,18 @@ $("#search-button").on('click', function () {
           target: "_blank"});
         var newImage = $("<img>").attr("src", eventImageUrl);
         var newDiv = $("<div>").attr("id", "results-"+i)
-
         newImage.css("width", "300px")
         newDiv.append(event + " " + eventDate +" "+eventTime);
         newDiv.append(newLink);
         newLink.append(newImage);
-        $("#events").append(newDiv); 
+        $("#box"+(i+5)).replaceWith(newDiv); 
       }
              },
       error: function(xhr, status, err) {
                 // This time, we do not end up here! 
              }
   });
+  
 });
 
   $(".itineraryButtonEvents").on("click", function (){
