@@ -69,14 +69,14 @@ $("#search-button").on('click', function () {
             }
   });  
 
-  var citySearch = $("#zipcode").val().trim();
+  var citySearch = $("#city").val().trim();
   //var APIrestKey = "f9a5acdea9259dd8ef4a0a2a9868c19a";
   //var URLrest = "http://developers.zomato.com/api/v2.1/search?entity_id=" + citySearch + "&entity_type=city&apikey=f9a5acdea9259dd8ef4a0a2a9868c19a",
 
   $.ajax({
     method:"GET",
     crossDomain: true,
-    url: "http://developers.zomato.com/api/v2.1/search?entity_id=" + citySearch + "&entity_type=city",
+    url: "https://developers.zomato.com/api/v2.1/search?entity_id=" + citySearch + "&entity_type=city",
     dataType : "json",
     asynd: true,
     headers: {
@@ -84,12 +84,12 @@ $("#search-button").on('click', function () {
     },
     success: function(data) {
         var Eats = [];
-        var restName = response._embedded.restaurant.name(function(event) {
+        var restName = response.restaurants (function(event) {
          if(restName.includes(restaurant.name)) {
           return false 
            } 
           else {
-          eventNames.push(event.name);
+          restName.push(restaurants.name);
           return true 
          };
 
@@ -104,10 +104,9 @@ $("#search-button").on('click', function () {
       error: function(xhr, status, err) {
       // This time, we do not end up here! 
       }
-   }),
+  })
 
-});
-  //curl -X GET --header "Accept: application/json" --header "user-key: f9a5acdea9259dd8ef4a0a2a9868c19a" "https://developers.zomato.com/api/v2.1/search?entity_id=Broomfield&entity_type=city"
+ });
 
   $(".itineraryButtonEvents").on("click", function (){
     var data =  $(this).data();
@@ -117,13 +116,15 @@ $("#search-button").on('click', function () {
     $("#iten-box").append(newDiv);
   })
 
-  //$(".itineraryButtonEats").on("click", function (){
-    //var data =  $(this).data();
-    // this will change based on eats ajax var resturants = filteredEvents[data.index];
-    //console.log(event);
-    //var newDiv = $("<div>").text(event.name);
-   // $("#iten-box").append(newDiv);
-  //})
+  $(".itineraryButtonEats").on("click", function (){
+    var data =  $(this).data();
+    var Eats = restName[data.index];
+    console.log(event);
+    var newDiv = $("<div>").text(restaurant.name);
+    $("#iten-box").append(newDiv);
+  })
+
+
 //On click function that takes the checked event or restaurant and updates the intinerary with the event or restuarant then saves it to local storage
 
 //Extra Credit... create a modal that pops up with a message depending on what the user adds to their list
