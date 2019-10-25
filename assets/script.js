@@ -88,18 +88,23 @@ $("#search-button").on('click', function () {
     },
     success: function(response) {
       console.log(response);
-        var Eats = [];
         var restaurantArr = response.restaurants;
         console.log(restaurantArr)
 
        for(var i = 0; i < 5; i++) {
         var newDiv = $("<div>").attr("id", "results"+i);
-        newDiv.text(restaurantArr[i].restaurant.name);
         console.log(restaurantArr[i].restaurant.name);
+        var imgDiv = $("<img>").attr("src", restaurantArr[i].restaurant.thumb);
+
+        var newButton = $("<button>").text("Add to Itinerary").attr('class','itinerary-btn');
+        var restName = $("<p>").text(restaurantArr[i].restaurant.name).css({display:"block", color: "black"});
+        imgDiv.css("width", "300px")
+        newDiv.append(restName, imgDiv, newButton);
            $("#box" + (i)).replaceWith(newDiv);
         }
-    
+        
     },
+    
 
       error: function(xhr, status, err) {
       // This time, we do not end up here! 
@@ -126,8 +131,22 @@ $("#search-button").on('click', function () {
       console.log(siblings[0]);
       var eventText = siblings[0].textContent;
       console.log(eventText);
-      var eventItin = $("<p></p>").text(eventText);
+      var eventItin = $("<p></p>").text(eventText).css({display:"block", color: "black"});
       $("#itin-box").append(eventItin);
+      
       
 
   });
+
+  $(".food").on('click', ".itinerary-btn", function (){
+    var clicked = $(this);
+    console.log(clicked);
+    let siblings = clicked.siblings();
+    console.log(siblings[0]);
+    var foodText = siblings[0].textContent;
+    console.log(foodText);
+    var foodItin = $("<p></p>").text(foodText).css({display:"block", color: "black"});
+    $("#itin-box").append(foodItin);
+    
+
+});
