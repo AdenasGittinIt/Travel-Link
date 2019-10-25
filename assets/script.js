@@ -26,7 +26,7 @@ $("#search-button").on('click', function () {
     //This is the API call from TicketMaster
   $.ajax({
     type:"GET",
-    url:"https://cors-anywhere.herokuapp.com/https://app.ticketmaster.com/discovery/v2/events.jason?city=" + city + "&radius=30&unit=miles&locale=*&startDateTime=" + startDate + "T00:00:00Z&endDateTime=" + endDate + "T12:00:00Z&includeTBA=yes&includeTBD=yes&sort=date,name,asc&source=%20tmr&source=%20frontgate&source=%20universe&source=ticketmaster&apikey=3lnAM350kKFnvBTJoQKYZc9ksm0IPfOY",
+    url:"https://cors-anywhere.herokuapp.com/https://app.ticketmaster.com/discovery/v2/events.jason?city=" + city + "&radius=30&unit=miles&locale=*&startDateTime=" + startDate + "T23:59:59Z&endDateTime=" + endDate + "T23:59:59Z&includeTBA=yes&includeTBD=yes&sort=date,name,asc&source=%20tmr&source=%20frontgate&source=%20universe&source=ticketmaster&apikey=3lnAM350kKFnvBTJoQKYZc9ksm0IPfOY",
 
     async:true,
     dataType: "json",
@@ -95,15 +95,11 @@ $("#search-button").on('click', function () {
         var newDiv = $("<div>").attr("id", "results"+i);
         console.log(restaurantArr[i].restaurant.name);
         var imgDiv = $("<img>").attr("src", restaurantArr[i].restaurant.thumb);
-        var menuLink = $("<a>").attr({
-          href: restaurantArr[i].restaurant.menu_url,
-          target: "_blank"});
 
         var newButton = $("<button>").text("Add to Itinerary").attr('class','itinerary-btn');
         var restName = $("<p>").text(restaurantArr[i].restaurant.name).css({display:"block", color: "black"});
         imgDiv.css("width", "300px")
-        newDiv.append(restName, menuLink, imgDiv, newButton);
-        menuLink.append(imgDiv);
+        newDiv.append(restName, imgDiv, newButton);
            $("#box" + (i)).replaceWith(newDiv);
         }
         
