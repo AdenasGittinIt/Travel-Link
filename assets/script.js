@@ -112,6 +112,12 @@ $("#search-button").on('click', function () {
   })
 });
 
+// $("#clear-button).on('click', function () {}
+$("#clear-button").on("click", function(){
+  location.reload();
+})
+ 
+
 
 //On click function that takes the checked event or restaurant and updates the intinerary with the event or restuarant then saves it to local storage
 
@@ -133,6 +139,7 @@ $("#search-button").on('click', function () {
       console.log(eventText);
       var eventItin = $("<p></p>").text(eventText).css({display:"block", color: "black"});
       $("#itin-box").append(eventItin);
+
       
       
 
@@ -147,6 +154,7 @@ $("#search-button").on('click', function () {
     console.log(foodText);
     var foodItin = $("<p></p>").text(foodText).css({display:"block", color: "black"});
     $("#itin-box").append(foodItin);
+
     
 
 });
