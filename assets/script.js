@@ -95,11 +95,14 @@ $("#search-button").on('click', function () {
         var newDiv = $("<div>").attr("id", "results"+i);
         console.log(restaurantArr[i].restaurant.name);
         var imgDiv = $("<img>").attr("src", restaurantArr[i].restaurant.thumb);
-
+        var menuLink = $("<a>").attr({
+          href: restaurantArr[i].restaurant.menu_url,
+          target: "_blank"});
         var newButton = $("<button>").text("Add to Itinerary").attr('class','itinerary-btn');
         var restName = $("<p>").text(restaurantArr[i].restaurant.name).css({display:"block", color: "black"});
         imgDiv.css("width", "300px")
-        newDiv.append(restName, imgDiv, newButton);
+        newDiv.append(restName, menuLink, imgDiv, newButton);
+        menuLink.append(imgDiv);
            $("#box" + (i)).replaceWith(newDiv);
         }
         
