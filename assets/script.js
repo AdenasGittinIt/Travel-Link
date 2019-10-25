@@ -88,7 +88,6 @@ $("#search-button").on('click', function () {
     },
     success: function(response) {
       console.log(response);
-        var Eats = [];
         var restaurantArr = response.restaurants;
         console.log(restaurantArr)
 
@@ -106,6 +105,12 @@ $("#search-button").on('click', function () {
       }
   })
 });
+
+// $("#clear-button).on('click', function () {}
+$("#clear-button").on("click", function(){
+  location.reload();
+})
+ 
 
 
 //On click function that takes the checked event or restaurant and updates the intinerary with the event or restuarant then saves it to local storage
@@ -128,6 +133,6 @@ $("#search-button").on('click', function () {
       console.log(eventText);
       var eventItin = $("<p></p>").text(eventText);
       $("#itin-box").append(eventItin);
-      
+    
 
   });
