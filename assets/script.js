@@ -58,11 +58,16 @@ $("#search-button").on('click', function () {
           target: "_blank"});
         var newImage = $("<img>").attr("src", eventImageUrl);
         var newDiv = $("<div>").attr("data-box", "box"+(i+5));
+        //Here is where we created itinerary button
+        var newButton = $("<button>").text("Add to Itinerary").attr('class','itinerary-btn');
+        var eventTitle = $("<p>").text(event + " " + eventDate).css({display:"block", color: "black"});
+         // <button></button>
+        
         newImage.css("width", "300px")
-        var newTextSpan = $("<span>").css({display:"block", color: "black"});
-        newTextSpan.text(event + " " + eventDate)
-        newDiv.append(newTextSpan);
-        newDiv.append(newLink);
+
+        
+        newDiv.append(eventTitle, newLink, newButton);
+        
         newLink.append(newImage);
         $("#box"+(i+5)).replaceWith(newDiv); 
       }
@@ -74,6 +79,7 @@ $("#search-button").on('click', function () {
   
 });
 
+
 //On click function that takes the checked event or restaurant and updates the intinerary with the event or restuarant then saves it to local storage
 
 //Extra Credit... create a modal that pops up with a message depending on what the user adds to their list
@@ -81,3 +87,19 @@ $("#search-button").on('click', function () {
   //"don't forget to check the weather" if it's an outdoor event
   //"that looks fun" for another event
   //"you have great taste in music" for a concert
+
+
+  
+  // Here is where we add food or events to Itinerary
+  $(".events").on('click', ".itinerary-btn", function (){
+      var clicked = $(this);
+      console.log(clicked);
+      let siblings = clicked.siblings();
+      console.log(siblings[0]);
+      var eventText = siblings[0].textContent;
+      console.log(eventText);
+      var eventItin = $("<p></p>").text(eventText);
+      $("#itin-box").append(eventItin);
+      
+
+  })
