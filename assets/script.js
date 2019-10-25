@@ -88,18 +88,29 @@ $("#search-button").on('click', function () {
     },
     success: function(response) {
       console.log(response);
-        var Eats = [];
         var restaurantArr = response.restaurants;
         console.log(restaurantArr)
 
        for(var i = 0; i < 5; i++) {
         var newDiv = $("<div>").attr("id", "results"+i);
-        newDiv.text(restaurantArr[i].restaurant.name);
         console.log(restaurantArr[i].restaurant.name);
+        var imgDiv = $("<img>").attr("src", restaurantArr[i].restaurant.thumb);
+
+        var newButton = $("<button>").text("Add to Itinerary").attr('class','itinerary-btn');
+        var restName = $("<p>").text(restaurantArr[i].restaurant.name).css({display:"block", color: "black"});
+        imgDiv.css("width", "300px")
+        newDiv.append(restName, imgDiv, newButton);
            $("#box" + (i)).replaceWith(newDiv);
         }
+        //var newButton = $("<button>").text("Add to Itinerary").attr('class','itinerary-btn');
+        //var restName = $("<p>").text(restaurantArr[i]).css({display:"block", color: "black"});
     
+        //newDiv.append(restName, newButton);
     },
+    //var newButton = $("<button>").text("Add to Itinerary").attr('class','itinerary-btn');
+    //var restName = $("<p>").text(restaurant.name).css({display:"block", color: "black"});
+
+    //newDiv.append(restName, newButton);
 
       error: function(xhr, status, err) {
       // This time, we do not end up here! 
