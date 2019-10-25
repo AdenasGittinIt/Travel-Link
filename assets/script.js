@@ -58,9 +58,15 @@ $("#search-button").on('click', function () {
           target: "_blank"});
         var newImage = $("<img>").attr("src", eventImageUrl);
         var newDiv = $("<div>").attr("data-box", "box"+(i+5));
+        //Here is where we created itinerary button
+        var newButton = $("<button>").text("Add to Itinerary").attr('class','itinerary-btn');
+        var eventTitle = $("<p>").text(event + " " + eventDate);
+         // <button></button>
+        
         newImage.css("width", "300px")
-        newDiv.append(event + " " + eventDate);
-        newDiv.append(newLink);
+        
+        newDiv.append(eventTitle, newLink, newButton);
+        
         newLink.append(newImage);
         $("#box"+(i+5)).replaceWith(newDiv); 
       }
@@ -72,13 +78,7 @@ $("#search-button").on('click', function () {
   
 });
 
-  $(".itineraryButtonEvents").on("click",function() {
-    var data =  $(this).data();
-    var event = filteredEvents[data.index];
-    console.log(event);
-    var itinDiv = $("<div>").text(event.name);
-    $("#itin-box").append(itinDiv);
-  });
+
 
   //$(".itineraryButtonEats").on("click", function (){
     //var data =  $(this).data();
@@ -94,3 +94,19 @@ $("#search-button").on('click', function () {
   //"don't forget to check the weather" if it's an outdoor event
   //"that looks fun" for another event
   //"you have great taste in music" for a concert
+
+
+  
+  // Here is where we add food or events to Itinerary
+  $(".events").on('click', ".itinerary-btn", function (){
+      var clicked = $(this);
+      console.log(clicked);
+      let siblings = clicked.siblings();
+      console.log(siblings[0]);
+      var eventText = siblings[0].textContent;
+      console.log(eventText);
+      var eventItin = $("<p></p>").text(eventText);
+      $("#itin-box").append(eventItin);
+      
+
+  })
