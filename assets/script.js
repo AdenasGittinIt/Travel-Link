@@ -74,21 +74,6 @@ $("#search-button").on('click', function () {
   
 });
 
-  $(".itineraryButtonEvents").on("click",function() {
-    var data =  $(this).data();
-    var event = filteredEvents[data.index];
-    console.log(event);
-    var itinDiv = $("<div>").text(event.name);
-    $("#itin-box").append(itinDiv);
-  });
-
-  //$(".itineraryButtonEats").on("click", function (){
-    //var data =  $(this).data();
-    // this will change based on eats ajax var resturants = filteredEvents[data.index];
-    //console.log(event);
-    //var newDiv = $("<div>").text(event.name);
-   // $("#iten-box").append(newDiv);
-  //})
 //On click function that takes the checked event or restaurant and updates the intinerary with the event or restuarant then saves it to local storage
 
 //Extra Credit... create a modal that pops up with a message depending on what the user adds to their list
