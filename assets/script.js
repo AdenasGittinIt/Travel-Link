@@ -75,8 +75,36 @@ $("#search-button").on('click', function () {
       error: function(xhr, status, err) {
                 // This time, we do not end up here! 
              }
+             
   });
-  
+  $.ajax({
+    method:"GET",
+    crossDomain: true,
+    url: "https://developers.zomato.com/api/v2.1/search?entity_id=" + city + "&entity_type=city",
+    dataType : "json",
+    async: true,
+    headers: {
+      "user-key": "f9a5acdea9259dd8ef4a0a2a9868c19a"
+    },
+    success: function(response) {
+      console.log(response);
+        var Eats = [];
+        var restaurantArr = response.restaurants;
+        console.log(restaurantArr)
+
+       for(var i = 0; i < 5; i++) {
+        var newDiv = $("<div>").attr("id", "results"+i);
+        newDiv.text(restaurantArr[i].restaurant.name);
+        console.log(restaurantArr[i].restaurant.name);
+           $("#box" + (i)).replaceWith(newDiv);
+        }
+    
+    },
+
+      error: function(xhr, status, err) {
+      // This time, we do not end up here! 
+      }
+  })
 });
 
 
@@ -102,4 +130,4 @@ $("#search-button").on('click', function () {
       $("#itin-box").append(eventItin);
       
 
-  })
+  });
