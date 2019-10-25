@@ -102,15 +102,9 @@ $("#search-button").on('click', function () {
         newDiv.append(restName, imgDiv, newButton);
            $("#box" + (i)).replaceWith(newDiv);
         }
-        //var newButton = $("<button>").text("Add to Itinerary").attr('class','itinerary-btn');
-        //var restName = $("<p>").text(restaurantArr[i]).css({display:"block", color: "black"});
-    
-        //newDiv.append(restName, newButton);
+        
     },
-    //var newButton = $("<button>").text("Add to Itinerary").attr('class','itinerary-btn');
-    //var restName = $("<p>").text(restaurant.name).css({display:"block", color: "black"});
-
-    //newDiv.append(restName, newButton);
+    
 
       error: function(xhr, status, err) {
       // This time, we do not end up here! 
@@ -137,8 +131,22 @@ $("#search-button").on('click', function () {
       console.log(siblings[0]);
       var eventText = siblings[0].textContent;
       console.log(eventText);
-      var eventItin = $("<p></p>").text(eventText);
+      var eventItin = $("<p></p>").text(eventText).css({display:"block", color: "black"});
       $("#itin-box").append(eventItin);
+      
       
 
   });
+
+  $(".food").on('click', ".itinerary-btn", function (){
+    var clicked = $(this);
+    console.log(clicked);
+    let siblings = clicked.siblings();
+    console.log(siblings[0]);
+    var foodText = siblings[0].textContent;
+    console.log(foodText);
+    var foodItin = $("<p></p>").text(foodText).css({display:"block", color: "black"});
+    $("#itin-box").append(foodItin);
+    
+
+});
