@@ -1,6 +1,14 @@
 //on page load populate itinerary with items from local storage.
+var itineraryItems = JSON.parse(localStorage.getItem("itineraryItems")) || [];
 
-// This is the on click event that gets search results from our three APIs
+//function that updates local storage with the new itinerary item
+const updateStorage = () => {
+  localStorage.setItem("itineraryItems", JSON.stringify(itineraryItems));
+  // localStorage.setItem("lastID", lastID);
+}
+
+
+// This is the click event that gets search results from our three APIs
 $("#search-button").on('click', function () {
   event.preventDefault();
   var city = $('#city').val().trim().toLowerCase();
@@ -14,9 +22,10 @@ $("#search-button").on('click', function () {
     url: weatherURL,
     method: "GET"
   }).then(function (response) {
-    // console.log(response);    
+  
     var currentTemp = response.list[0].main.temp;
     var currentConditions = response.list[0].weather[0].main;
+
     // The current temperature is added to the page
     $("#temp").html("Current Temperature: " + currentTemp +"°");
     $("#conditions").html("Current Conditions: " + currentConditions);
@@ -51,32 +60,27 @@ $("#search-button").on('click', function () {
           return image.ratio === "3_2";
         });
         // Creating new HTML elements with my seaxrch results and adding them to the page
-        // I need to make additions/changes so that each result has a check box next to it
         var eventImageUrl = foundImage.url;
         var newLink = $("<a>").attr({
           href: filteredEvents[i].url,
           target: "_blank"});
         var newImage = $("<img>").attr("src", eventImageUrl);
         var newDiv = $("<div>").attr("data-box", "box"+(i+5));
+        
         //Here is where we created itinerary button
         var newButton = $("<button>").text("Add to Itinerary").attr('class','itinerary-btn');
         var eventTitle = $("<p>").text(event + " " + eventDate).css({display:"block", color: "black"});
-         // <button></button>
         
         newImage.css("width", "300px")
-
         
         newDiv.append(eventTitle, newLink, newButton);
         
         newLink.append(newImage);
         $("#box"+(i+5)).replaceWith(newDiv); 
       }
-             },
-      error: function(xhr, status, err) {
-                // This time, we do not end up here! 
-             }
-             
+    },     
   });
+
   $.ajax({
     method:"GET",
     crossDomain: true,
@@ -88,76 +92,56 @@ $("#search-button").on('click', function () {
     },
     success: function(response) {
       console.log(response);
-        var restaurantArr = response.restaurants;
-        console.log(restaurantArr)
-
+      var restaurantArr = response.restaurants;
+      console.log(restaurantArr)
        for(var i = 0; i < 5; i++) {
-        var newDiv = $("<div>").attr("id", "results"+i);
-        console.log(restaurantArr[i].restaurant.name);
-        var imgDiv = $("<img>").attr("src", restaurantArr[i].restaurant.thumb);
-        var menuLink = $("<a>").attr({
-          href: restaurantArr[i].restaurant.menu_url,
-          target: "_blank"});
-        var newButton = $("<button>").text("Add to Itinerary").attr('class','itinerary-btn');
-        var restName = $("<p>").text(restaurantArr[i].restaurant.name).css({display:"block", color: "black"});
-        imgDiv.css("width", "300px")
-        newDiv.append(restName, menuLink, imgDiv, newButton);
-        menuLink.append(imgDiv);
-           $("#box" + (i)).replaceWith(newDiv);
+          var newDiv = $("<div>").attr("id", "results"+i);
+          console.log(restaurantArr[i].restaurant.name);
+          var imgDiv = $("<img>").attr("src", restaurantArr[i].restaurant.thumb);
+          var menuLink = $("<a>").attr({
+            href: restaurantArr[i].restaurant.menu_url,
+            target: "_blank"});
+          var newButton = $("<button>").text("Add to Itinerary").attr('class','itinerary-btn');
+          var restName = $("<p>").text(restaurantArr[i].restaurant.name).css({display:"block", color: "black"});
+          imgDiv.css({width: "300px", height:"200px"})
+          newDiv.append(restName, menuLink, imgDiv, newButton);
+          menuLink.append(imgDiv);
+          $("#box" + (i)).replaceWith(newDiv);
         }
-        
     },
-    
-
-      error: function(xhr, status, err) {
-      // This time, we do not end up here! 
-      }
   })
 });
 
-// $("#clear-button).on('click', function () {}
+// Here is where we add food or events to Itinerary and save to local storage
+$(".events").on('click', ".itinerary-btn", function (){
+  var clicked = $(this);
+  console.log(clicked);
+  let siblings = clicked.siblings();
+  console.log(siblings[0]);
+  var eventText = siblings[0].textContent;
+  console.log(eventText);
+  var eventItin = $("<p></p>").text(eventText).css({display:"block", color: "black"});
+  $("#itin-box").append(eventItin);
+});
+
+$(".food").on('click', ".itinerary-btn", function (){
+  var clicked = $(this);
+  console.log(clicked);
+  let siblings = clicked.siblings();
+  console.log(siblings[0]);
+  var foodText = siblings[0].textContent;
+  console.log(foodText);
+  var foodItin = $("<p></p>").text(foodText).css({display:"block", color: "black"});
+  $("#itin-box").append(foodItin);
+});
+
+// The click function for our clear button that resets the page
 $("#clear-button").on("click", function(){
   location.reload();
 })
- 
-
-
-//On click function that takes the checked event or restaurant and updates the intinerary with the event or restuarant then saves it to local storage
 
 //Extra Credit... create a modal that pops up with a message depending on what the user adds to their list
   //"that looks delicious" for a restaurangt
   //"don't forget to check the weather" if it's an outdoor event
   //"that looks fun" for another event
   //"you have great taste in music" for a concert
-
-
-  
-  // Here is where we add food or events to Itinerary
-  $(".events").on('click', ".itinerary-btn", function (){
-      var clicked = $(this);
-      console.log(clicked);
-      let siblings = clicked.siblings();
-      console.log(siblings[0]);
-      var eventText = siblings[0].textContent;
-      console.log(eventText);
-      var eventItin = $("<p></p>").text(eventText).css({display:"block", color: "black"});
-      $("#itin-box").append(eventItin);
-
-      
-      
-
-  });
-
-  $(".food").on('click', ".itinerary-btn", function (){
-    var clicked = $(this);
-    console.log(clicked);
-    let siblings = clicked.siblings();
-    console.log(siblings[0]);
-    var foodText = siblings[0].textContent;
-    console.log(foodText);
-    var foodItin = $("<p></p>").text(foodText).css({display:"block", color: "black"});
-    $("#itin-box").append(foodItin);
-
-    
-
-});
