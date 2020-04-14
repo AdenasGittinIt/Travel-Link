@@ -1,7 +1,7 @@
 # TraveLink
 Our first project on the journey to becomeing web developers, **TraveLink** gives a traveler the ability to explore entertainment options in their destination city with a weather forecast so the savvy traveler can be prepared for whatever mother nature brings.  
 
-The traveler can save to an itinerary, the events they're most interested in and follow a hyperlink to purchase admission.  
+The traveler can save to an itinerary the events they're most interested in and follow a hyperlink to purchase admission.  
 
 Use of the site can be summed up with the following user story:
 
@@ -14,7 +14,7 @@ Use of the site can be summed up with the following user story:
 
 ## Take it for a spin!
 
-To use the app, enter the date of your arrival and departure and the name of any US city then click search.  Once your search results display click the "Add to Itenerary" button to add events of interest to your itinerary.
+To use the app, enter your arrival and departure dates, and the name of the US city you're traveling to then click 'Search'.  Once your search results display click the 'Add to Itinerary' button below the event's image to add the events you're interested in to your itinerary.
 
 Click [here](https://adenasgittinit.github.io/Travel-Link/) to get started.
 
