@@ -25,5 +25,6 @@ Click [here](https://adenasgittinit.github.io/Travel-Link/) to get started.
 * [Materialize CSS](https://materializecss.com/)
 
 ## Contributors
-[Tyson Call](https://github.com/tysoncall)
-[Heather Carr](https://github.com/hdcarr87)
+* [Tyson Call](https://github.com/tysoncall)
+* [Heather Carr](https://github.com/hdcarr87)
+* [Adena McGibbon](https://github.com/AdenasGittIt)
