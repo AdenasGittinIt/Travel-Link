@@ -59,7 +59,7 @@ $("#search-button").on('click', function () {
         var foundImage = filteredEvents[i].images.find(function(image) {
           return image.ratio === "3_2";
         });
-        // Creating new HTML elements with my seaxrch results and adding them to the page
+        // Creating new HTML elements with my search results and adding them to the page
         var eventImageUrl = foundImage.url;
         var newLink = $("<a>").attr({
           href: filteredEvents[i].url,
