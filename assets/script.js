@@ -8,11 +8,21 @@ const updateStorage = () => {
 }
 
 
+function showCards() {
+  var x = document.getElementsByClassName("card");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+
+
 // This is the click event that gets search results from our three APIs
 $("#search-button").on('click', function () {
   event.preventDefault();
   var city = $('#city').val().trim().toLowerCase();
-  var weatherURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + ",us&units=imperial&appid=00604984263164d160d696afed305b97";
+  let weatherURL = `https://api.openweathermap.org/data/2.5/forecast?q=${city},&units=imperial&appid=00604984263164d160d696afed305b97`;
   var startDate = $('#arrival-date').val().trim();
   console.log(startDate);
   var endDate = $('#departure-date').val().trim();
@@ -31,7 +41,7 @@ $("#search-button").on('click', function () {
     $("#conditions").html("Current Conditions: " + currentConditions);
     console.log(response);
   });
-    
+
     //This is the API call from TicketMaster
   $.ajax({
     type:"GET",
@@ -50,7 +60,7 @@ $("#search-button").on('click', function () {
           return true 
         }
       });
-      console.log(filteredEvents);
+      // console.log(filteredEvents);
         // Looping through the filteredEvents to get start date, time, event name and image.  Returning at max, 5 results.
       for(i = 0; i < 5; i++) {
         var event = filteredEvents[i].name
@@ -76,7 +86,7 @@ $("#search-button").on('click', function () {
         newDiv.append(eventTitle, newLink, newButton);
         
         newLink.append(newImage);
-        $("#box"+(i+5)).replaceWith(newDiv); 
+        $("#box"+(i+5)).replaceWith(newDiv);
       }
     },     
   });
@@ -91,12 +101,10 @@ $("#search-button").on('click', function () {
       "user-key": "f9a5acdea9259dd8ef4a0a2a9868c19a"
     },
     success: function(response) {
-      console.log(response);
       var restaurantArr = response.restaurants;
-      console.log(restaurantArr)
+
        for(var i = 0; i < 5; i++) {
           var newDiv = $("<div>").attr("id", "results"+i);
-          console.log(restaurantArr[i].restaurant.name);
           var imgDiv = $("<img>").attr("src", restaurantArr[i].restaurant.thumb);
           var menuLink = $("<a>").attr({
             href: restaurantArr[i].restaurant.menu_url,
@@ -110,17 +118,15 @@ $("#search-button").on('click', function () {
         }
     },
   })
+  showCards(); 
 });
 
 // Here is where we add food or events to Itinerary and save to local storage
 $(".events").on('click', ".itinerary-btn", function (){
   var clicked = $(this);
-  console.log(clicked);
   let siblings = clicked.siblings();
-  console.log(siblings[0]);
   var eventText = siblings[0].textContent;
-  console.log(eventText);
-  var eventItin = $("<p></p>").text(eventText).css({display:"block", color: "black"});
+  var eventItin = $("<p></p>").text(eventText).css({display:"block", color: "white"});
   $("#itin-box").append(eventItin);
 });
 
@@ -131,7 +137,7 @@ $(".food").on('click', ".itinerary-btn", function (){
   console.log(siblings[0]);
   var foodText = siblings[0].textContent;
   console.log(foodText);
-  var foodItin = $("<p></p>").text(foodText).css({display:"block", color: "black"});
+  var foodItin = $("<p></p>").text(foodText).css({display:"block", color: "white"});
   $("#itin-box").append(foodItin);
 });
 

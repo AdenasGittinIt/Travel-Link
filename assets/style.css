@@ -1,15 +1,25 @@
-
 body {
-    background-image: url("https://static9.depositphotos.com/1441191/1196/v/950/depositphotos_11961483-stock-illustration-travel-background.jpg");
+    background-image: url("USPlates.png");
     background-repeat: no-repeat;
     background-size: cover;
     font-family: "Arial";
-   
+  }
 
+div.overlay {
+    background-color:rgb(77,182,172,.8);
+    color:white;
+    font-weight: bold;
+  }
+  
+input  {
+      color: white;
   }
 
 
-  .chip {
+
+
+
+  /* .chip {
       width: 300px;
       text-align: left;
      
@@ -105,5 +115,5 @@ h4 {
     color: black;
 }
 
- 
+  */
 

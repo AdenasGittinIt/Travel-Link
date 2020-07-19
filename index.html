@@ -1,177 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Travel Link</title>
-    <link rel="stylesheet" href="assets/style.css"/>
-    <!-- Compiled and minified CSS -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
-    />
-
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script
-      src="https://kit.fontawesome.com/8ce1e63b1f.js"
-      crossorigin="anonymous"
-    ></script>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TraveLink</title>
+    <link rel="stylesheet" href="assets/style.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   </head>
-  <body>
-  <nav>
-    <div class="nav-wrapper cyan lighten-3">
-      <a href="#" class="brand-logo center" id="logo">TraveLink</a>
-      <ul id="nav-mobile" class="left hide-on-med-and-down">
-        <li>
-          <a href="sass.html"><i class="fas fa-plane"></i> </a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-  
-    <div id="search-inputs">
-      <!-- <h3 class="oneline"></h3>// -->
-      <form>
-        <div class="oneline">
-          Arrival Date:
-          <input type="date" id="arrival-date" /><br />
-        </div>
-        <div class="oneline">
-          Departure Date:
-          <input type="date" id="departure-date" /><br />
-        </div>
-        <div class="oneline">
-          Destination City:
-          <input type="text" id="city" /><br />
-        </div>
 
-        <input type="button" id="search-button" value="Search" />
-        <div class="oneline">
-          <input type="button" id="clear-button" value="Clear Results" />
+  <body>
+    <div class="container">
+      <div class="row"> <!-- header row -->
+        <div class="col s3">
+          <h2 class="white-text">TraveLink</h2>
         </div>
-      </form>
-    </div>
-   
-    <div id="weather-display">  
-        <form>
-          <div class="chip" id="temp"> 
-             Current Temperature:
+      </div> <!-- header row -->
+      <div class="overlay">
+        <div class="row"> <!--search bar-->
+          <div class="col l3 s12">
+            <h5>Destination City:</h5>
+            <input type="text" id="city">
+          </div> 
+          <div class="col l3 s12">
+            <h5>Arrival Date:</h5>
+            <input type="date" id="arrival-date">
           </div>
-          <div class="chip" id="conditions">
-            Current Conditions:
+          <div class="col l3 s6">
+            <h5>Departure Date:</h5>
+            <input type="date" id="departure-date">
           </div>
-        
-        </form>
-      </div>
+          <div class="col l3 s6">
+            <input class="btn-large" type="button" id="search-button" value="Search" />
+            <input class="btn-large" type="button" id="clear-button" value="Clear Results" />
+          </div>
+        </div> <!--search bar-->
+
+
 
     <div class="row">
       <div class="col m4 offset-m0 food">
-          <h3>Food</h3>
-        <div class="card" id="box0">
+          <h3>Forecast</h3>
+        <div class="card" id="box0" style="display: none;">
           <div class="card-content white-text">
             
-            <span class="card-title">Local Eats: </span>
-            <p></p>
           </div>
           <div class="card-action">
-            <button class="itineraryButtonEats" data-index="0">Add to Itinerary</button>
+            <button class="itineraryButtonEats" data-index="0"></button>
           </div>
         </div>
-        <div class="card" id="box1">
+        <div class="card" id="box1" style="display: none;">
           <div class="card-content white-text">
-            <span class="card-title">Local Eats: </span>
-            <p></p>
           </div>
           <div class="card-action">
-              <button class="itineraryButtonEats">Add to Itinerary</button>
+              <button class="itineraryButtonEats"></button>
           </div>
         </div>
-        <div class="card" id="box2">
+        <div class="card" id="box2" style="display: none;">
           <div class="card-content white-text">
-            <span class="card-title">Local Eats: </span>
-            <p></p>
           </div>
           <div class="card-action">
-              <button class="itineraryButtonEats">Add to Itinerary</button>
+              <button class="itineraryButtonEats"></button>
           </div>
         </div>
 
-        <div class="card" id="box3">
+        <div class="card" id="box3" style="display: none;">
           <div class="card-content white-text">
-            <span class="card-title">Local Eats: </span>
-            <p></p>
           </div>
           <div class="card-action">
-              <button id="itineraryButton">Add to Itinerary</button>
+              <button id="itineraryButton"></button>
           </div>
         </div>
 
-        <div class="card" id="box4">
+        <div class="card" id="box4" style="display: none;">
           <div class="card-content white-text">
-            <span class="card-title">Local Eats: </span>
-            <p></p>
           </div>
           <div class="card-action">
-              <button id="itineraryButton">Add to Itinerary</button>
+              <button id="itineraryButton"></button>
           </div>
         </div>
       </div>
       <div class="col m4 offset-m0 events">
 
           <h3>Events</h3>
-        <div class="card" id="box5">
+        <div class="card" id="box5" style="display: none;">
           <div class="card-content white-text">
             <span class="card-title">Local Events: </span>
             <p></p>
           </div>
           <div class="card-action">
-              <button id="itineraryButtonEvents" data-index="0">Add to Itinerary</button>
+              <button id="itineraryButtonEvents" data-index="0"></button>
           </div>
         </div>
 
-        <div class="card" id="box6">
-          <div class="card-content white-text">
-            <span class="card-title">Local Events: </span>
-            <p></p>
-          </div>
-
-          <div class="card-action">
-              <button id="itineraryButtonEvents" data-index="1">Add to Itinerary</button>
-          </div>
-        </div>
-
-        <div class="card" id="box7">
+        <div class="card" id="box6" style="display: none;">
           <div class="card-content white-text">
             <span class="card-title">Local Events: </span>
             <p></p>
           </div>
 
           <div class="card-action">
-              <button id="itineraryButtonEvents" data-index="2">Add to Itinerary</button>
+              <button id="itineraryButtonEvents" data-index="1"></button>
           </div>
         </div>
-        <div class="card" id="box8">
+
+        <div class="card" id="box7" style="display: none;">
           <div class="card-content white-text">
             <span class="card-title">Local Events: </span>
             <p></p>
           </div>
 
           <div class="card-action">
-              <button id="itineraryButtonEvents" data-index="3">Add to Itinerary</button>
+              <button id="itineraryButtonEvents" data-index="2"></button>
+          </div>
+        </div>
+        <div class="card" id="box8" style="display: none;">
+          <div class="card-content white-text">
+            <span class="card-title">Local Events: </span>
+            <p></p>
+          </div>
+
+          <div class="card-action">
+              <button id="itineraryButtonEvents" data-index="3"></button>
           </div>
         </div>
 
-        <div class="card" id="box9">
+        <div class="card" id="box9" style="display: none;">
           <div class="card-content white-text">
             <span class="card-title">Local Events: </span>
             <p></p>
           </div>
           <div class="card-action" id="">
-              <button id="itineraryButtonEvents" data-index="4">Add to Itinerary</button>
+              <button id="itineraryButtonEvents" data-index="4"></button>
           </div>
         </div>
       </div>
@@ -181,21 +140,17 @@
 
         <div id="itin-box">
 
-         
         </div>
         
        
        
         
       </div>
-    
+    </div> <!--overlay div-->
+    </div> <!--container div-->
 
     
     </div>
-   
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> -->
-
-    <script src="https://kit.fontawesome.com/8ce1e63b1f.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="assets/script.js"></script>
 

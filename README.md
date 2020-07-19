@@ -29,6 +29,7 @@ Click [here](https://adenasgittinit.github.io/Travel-Link/) to get started.
 ## Direction for future development
 
 * The ability to search for dining options in the destination city
+* Ability to drag events or eateries from the results list to the itinerary
 
 ## Contributors
 * [Tyson Call](https://github.com/tysoncall)
