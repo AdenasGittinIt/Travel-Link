@@ -5,13 +5,13 @@ body {
     font-family: "Arial";
   }
 
-  div.overlay {
-    background-color:rgb(77,182,172,.5);
+div.overlay {
+    background-color:rgb(77,182,172,.8);
     color:white;
     font-weight: bold;
   }
   
-  input  {
+input  {
       color: white;
   }
 
