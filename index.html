@@ -1,161 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TraveLink</title>
-    <link rel="stylesheet" href="assets/style.css"/>
+    <link rel="stylesheet" href="assets/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   </head>
 
   <body>
     <div class="container">
-      <div class="row"> <!-- header row -->
-        <div class="col s3">
-          <h2 class="white-text">TraveLink</h2>
-        </div>
-      </div> <!-- header row -->
+
+        <div class="row"> <!-- header row -->
+          <div class="col s3">
+            <h2 class="white-text">TraveLink</h2>
+          </div>
+        </div> <!-- header row -->
+
       <div class="overlay">
-        <div class="row"> <!--search bar-->
+
+        <div class="row">  <!--search bar-->
+
           <div class="col l3 s12">
             <h5>Destination City:</h5>
             <input type="text" id="city">
-          </div> 
+          </div>
+
           <div class="col l3 s12">
             <h5>Arrival Date:</h5>
             <input type="date" id="arrival-date">
           </div>
+
           <div class="col l3 s6">
             <h5>Departure Date:</h5>
             <input type="date" id="departure-date">
           </div>
+
           <div class="col l3 s6">
             <input class="btn-large" type="button" id="search-button" value="Search" />
             <input class="btn-large" type="button" id="clear-button" value="Clear Results" />
           </div>
         </div> <!--search bar-->
 
-
-
-    <div class="row">
-      <div class="col m4 offset-m0 food">
-          <h3>Forecast</h3>
-        <div class="card" id="box0" style="display: none;">
-          <div class="card-content white-text">
-            
-          </div>
-          <div class="card-action">
-            <button class="itineraryButtonEats" data-index="0"></button>
-          </div>
-        </div>
-        <div class="card" id="box1" style="display: none;">
-          <div class="card-content white-text">
-          </div>
-          <div class="card-action">
-              <button class="itineraryButtonEats"></button>
-          </div>
-        </div>
-        <div class="card" id="box2" style="display: none;">
-          <div class="card-content white-text">
-          </div>
-          <div class="card-action">
-              <button class="itineraryButtonEats"></button>
-          </div>
-        </div>
-
-        <div class="card" id="box3" style="display: none;">
-          <div class="card-content white-text">
-          </div>
-          <div class="card-action">
-              <button id="itineraryButton"></button>
-          </div>
-        </div>
-
-        <div class="card" id="box4" style="display: none;">
-          <div class="card-content white-text">
-          </div>
-          <div class="card-action">
-              <button id="itineraryButton"></button>
-          </div>
-        </div>
-      </div>
-      <div class="col m4 offset-m0 events">
-
-          <h3>Events</h3>
-        <div class="card" id="box5" style="display: none;">
-          <div class="card-content white-text">
-            <span class="card-title">Local Events: </span>
-            <p></p>
-          </div>
-          <div class="card-action">
-              <button id="itineraryButtonEvents" data-index="0"></button>
-          </div>
-        </div>
-
-        <div class="card" id="box6" style="display: none;">
-          <div class="card-content white-text">
-            <span class="card-title">Local Events: </span>
-            <p></p>
+        <div class="row"> <!--results row-->
+          <div class="col m4 offset-m0" id="five-day">
+            <h3>Forecast</h3>
           </div>
 
-          <div class="card-action">
-              <button id="itineraryButtonEvents" data-index="1"></button>
-          </div>
-        </div>
-
-        <div class="card" id="box7" style="display: none;">
-          <div class="card-content white-text">
-            <span class="card-title">Local Events: </span>
-            <p></p>
+          <div class="col m4 offset-m0" id="events-col">
+            <h3>Events</h3>
           </div>
 
-          <div class="card-action">
-              <button id="itineraryButtonEvents" data-index="2"></button>
-          </div>
-        </div>
-        <div class="card" id="box8" style="display: none;">
-          <div class="card-content white-text">
-            <span class="card-title">Local Events: </span>
-            <p></p>
+          <div class="col m4 offset-m0">
+            <h3>Itinerary</h3>
+            <div id="itin-box"></div>
           </div>
 
-          <div class="card-action">
-              <button id="itineraryButtonEvents" data-index="3"></button>
-          </div>
-        </div>
-
-        <div class="card" id="box9" style="display: none;">
-          <div class="card-content white-text">
-            <span class="card-title">Local Events: </span>
-            <p></p>
-          </div>
-          <div class="card-action" id="">
-              <button id="itineraryButtonEvents" data-index="4"></button>
-          </div>
-        </div>
-      </div>
-
-      <div class="col m4 offset-m0">
-          <h3>Itinerary</h3>
-
-        <div id="itin-box">
-
-        </div>
-        
-       
-       
-        
-      </div>
-    </div> <!--overlay div-->
+        </div> <!--results row-->
+      </div> <!--overlay div-->
     </div> <!--container div-->
 
     
-    </div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="assets/script.js"></script>
-
-
-
-
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
   </body>
+
 </html>
