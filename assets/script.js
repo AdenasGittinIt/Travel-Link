@@ -1,11 +1,3 @@
-//on page load populate itinerary with items from local storage.
-var itineraryItems = JSON.parse(localStorage.getItem("itineraryItems")) || [];
-
-//function that updates local storage with the new itinerary item
-const updateStorage = () => {
-  localStorage.setItem("itineraryItems", JSON.stringify(itineraryItems));
-  // localStorage.setItem("lastID", lastID);
-}
 
 // This is the click event that gets search results from our three APIs
 $("#search-button").on('click', function () {
@@ -13,7 +5,6 @@ $("#search-button").on('click', function () {
   var city = $('#city').val().trim().toLowerCase();
   let weatherURL = `https://api.openweathermap.org/data/2.5/forecast?q=${city},&units=imperial&appid=00604984263164d160d696afed305b97`;
   var startDate = $('#arrival-date').val().trim();
-
   var endDate = $('#departure-date').val().trim();
 
     // This is the API call from Open Weather
@@ -48,6 +39,7 @@ $("#search-button").on('click', function () {
 
       const {date, temp, humidity, description, iconUrl} = day
 
+      //Creating a Meterialize card with forecast details
       $("#five-day").append(`
       <div class="card teal">
         <div class="card-image">
@@ -65,8 +57,7 @@ $("#search-button").on('click', function () {
   
     $.ajax({
       type:"GET",
-      url:"https://cors-anywhere.herokuapp.com/https://app.ticketmaster.com/discovery/v2/events.jason?city=" + city + "&radius=30&unit=miles&locale=*&startDateTime=" + startDate + "T23:59:59Z&endDateTime=" + endDate + "T23:59:59Z&includeTBA=yes&includeTBD=yes&sort=date,name,asc&source=%20tmr&source=%20frontgate&source=%20universe&source=ticketmaster&apikey=3lnAM350kKFnvBTJoQKYZc9ksm0IPfOY",
-    
+      url:`https://cors-anywhere.herokuapp.com/https://app.ticketmaster.com/discovery/v2/events.jason?city=${city}&radius=30&unit=miles&locale=*&startDateTime=${startDate}T23:59:59Z&endDateTime=${endDate}T23:59:59Z&includeTBA=yes&includeTBD=yes&sort=date,name,asc&source=%20tmr&source=%20frontgate&source=%20universe&source=ticketmaster&apikey=3lnAM350kKFnvBTJoQKYZc9ksm0IPfOY`,    
       async:true,
       dataType: "json",
       success: function(response) {
@@ -80,8 +71,9 @@ $("#search-button").on('click', function () {
             return true 
           }
         });
-        // console.log(filteredEvents);
-          // Looping through the filteredEvents to get start date, time, event name and image.  Returning at max, 5 results.
+
+        // Looping through filteredEvents to get start date, time, event name and image.  Returning at max, 5 results.
+
         for(i = 0; i < 5; i++) {
           var event = filteredEvents[i].name
           var eventDate = filteredEvents[i].dates.start.localDate
@@ -89,24 +81,9 @@ $("#search-button").on('click', function () {
           var foundImage = filteredEvents[i].images.find(function(image) {
             return image.ratio === "3_2";
           });
-          // Creating new HTML elements with my search results and adding them to the page
           var eventImageUrl = foundImage.url;
-          // var newLink = $("<a>").attr({
-          //   href: filteredEvents[i].url,
-          //   target: "_blank"});
-          // var newImage = $("<img>").attr("src", eventImageUrl);
-          // var newDiv = $("<div>").attr("data-box", "box"+(i+5));
-          
-          // //Here is where we created itinerary button
-          // var newButton = $("<button>").text("Add to Itinerary").attr('class','itinerary-btn');
-          // var eventTitle = $("<p>").text(event + " " + eventDate).css({display:"block", color: "black"});
-          
-          // newImage.css("width", "300px")
-          
-          // newDiv.append(eventTitle, newLink, newButton);
-          
-          // newLink.append(newImage);
-          // $("#box"+(i+5)).replaceWith(newDiv);
+
+          // Creating a Materialize card with select details from search results for each filtered event and adding them to the page
 
           console.log(eventTime); 
           $("#events-col").append(`
@@ -119,7 +96,7 @@ $("#search-button").on('click', function () {
             <div class="card-content">
               <span class="card-title">${event}</span>
               <p>${eventDate}, ${eventTime}</p>
-              <button class="intinerary-btn">Add to Itinerary</button>
+              <button class="intinBtn btn-small" id="data-${i}">Add to Itinerary</button>
             </div>
           </div>
           `)
@@ -129,33 +106,39 @@ $("#search-button").on('click', function () {
 });
 
 
-// Here is where we add food or events to Itinerary and save to local storage
-$(".events").on('click', ".itinerary-btn", function (){
-  var clicked = $(this);
+// Here is where we add events to Itinerary that will eventually be extended to also save to local storage
+$("#events-col").on("click", ".intinBtn", function() {
+  let clicked = $(this);
   console.log(clicked)
-  let siblings = clicked.siblings();
-  var eventText = siblings[0].textContent;
-  var eventItin = $("<p></p>").text(eventText).css({display:"block", color: "white"});
-  $("#itin-box").append(eventItin);
-});
+  let sibling = clicked.siblings();
+  let itinEventTime = `${sibling[1].innerText}`;
+  let itinEventTitle = `${sibling[0].innerText}`
 
-$(".food").on('click', ".itinerary-btn", function (){
-  var clicked = $(this);
-  console.log(clicked);
-  let siblings = clicked.siblings();
-  console.log(siblings[0]);
-  var foodText = siblings[0].textContent;
-  console.log(foodText);
-  var foodItin = $("<p></p>").text(foodText).css({display:"block", color: "white"});
-  $("#itin-box").append(foodItin);
-});
+  //Creating a Meterialize card with the events title, date and time.
+  $("#itin-col").append(`
+  <div class="card teal">
+    <div class="card-content white-text">
+      <span class="card-title">${itinEventTitle}</span>
+      <p>${itinEventTime}</p>
+      <button class="removeBtn btn-small" data-id=${clicked[0].id}>Remove</button>
+    </div>
+  <div>
+  `)
+})
 
-// The click function for our clear button that resets the page
+//This is the click listener to remove an item from the itenerary and will eventually be extended to remove from local storage
+$("#itin-col").on("click", ".removeBtn", function() {
+  let itinClicked = $(this);
+  console.log(itinClicked);
+  itinClicked[0].offsetParent.remove();
+})
+
+// The click listener for "Clear Results" button that resets the page
 $("#clear-button").on("click", function(){
   location.reload();
 })
 
-//Possible future development... create a modal that pops up with a message depending on what the user adds to their list
+//For possible future development... create a modal that pops up with a message depending on what the user adds to their list
   //"that looks delicious" for a restaurangt
   //"don't forget to check the weather" if it's an outdoor event
   //"that looks fun" for another event
