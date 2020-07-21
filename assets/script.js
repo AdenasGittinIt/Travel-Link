@@ -119,7 +119,7 @@ $("#search-button").on('click', function () {
             <div class="card-content">
               <span class="card-title">${event}</span>
               <p>${eventDate}, ${eventTime}</p>
-              <button class="intinerary-btn">Add to Itinerary</button>
+              <button class="intinBtn" id="data-${i}">Add to Itinerary</button>
             </div>
           </div>
           `)
@@ -129,7 +129,39 @@ $("#search-button").on('click', function () {
 });
 
 
-// Here is where we add food or events to Itinerary and save to local storage
+// Here is where we add events to Itinerary and will eventually be modified to save to local storage
+$("#events-col").on("click", ".intinBtn", function() {
+  let clicked = $(this);
+  console.log(clicked)
+  let sibling = clicked.siblings();
+  let itinEventTime = `${sibling[1].innerText}`;
+  let itinEventTitle = `${sibling[0].innerText}`
+
+  $("#itin-col").append(`
+  <div class="card teal">
+    <div class="card-content white-text">
+      <span class="card-title">${itinEventTitle}</span>
+      <p>${itinEventTime}</p>
+      <button class="removeBtn" data-id=${clicked[0].id}>Remove</button>
+    </div>
+  <div>
+  `)
+})
+
+//This is the click listener to remove an item from the itenerary and will eventuall be modivide to remove from local storage
+$("#itin-col").on("click", ".removeBtn", function() {
+  let itinClicked = $(this);
+  console.log(itinClicked);
+})
+
+
+
+
+
+
+
+
+
 $(".events").on('click', ".itinerary-btn", function (){
   var clicked = $(this);
   console.log(clicked)
