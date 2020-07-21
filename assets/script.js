@@ -65,7 +65,7 @@ $("#search-button").on('click', function () {
   
     $.ajax({
       type:"GET",
-      url:"https://cors-anywhere.herokuapp.com/https://app.ticketmaster.com/discovery/v2/events.jason?city=" + city + "&radius=30&unit=miles&locale=*&startDateTime=" + startDate + "T23:59:59Z&endDateTime=" + endDate + "T23:59:59Z&includeTBA=yes&includeTBD=yes&sort=date,name,asc&source=%20tmr&source=%20frontgate&source=%20universe&source=ticketmaster&apikey=3lnAM350kKFnvBTJoQKYZc9ksm0IPfOY",
+      url:`https://cors-anywhere.herokuapp.com/https://app.ticketmaster.com/discovery/v2/events.jason?city="${city}&radius=30&unit=miles&locale=*&startDateTime=${startDate}T23:59:59Z&endDateTime=${endDate}T23:59:59Z&includeTBA=yes&includeTBD=yes&sort=date,name,asc&source=%20tmr&source=%20frontgate&source=%20universe&source=ticketmaster&apikey=3lnAM350kKFnvBTJoQKYZc9ksm0IPfOY`
     
       async:true,
       dataType: "json",
@@ -80,8 +80,9 @@ $("#search-button").on('click', function () {
             return true 
           }
         });
-        // console.log(filteredEvents);
-          // Looping through the filteredEvents to get start date, time, event name and image.  Returning at max, 5 results.
+
+        // Looping through filteredEvents to get start date, time, event name and image.  Returning at max, 5 results.
+
         for(i = 0; i < 5; i++) {
           var event = filteredEvents[i].name
           var eventDate = filteredEvents[i].dates.start.localDate
@@ -89,24 +90,9 @@ $("#search-button").on('click', function () {
           var foundImage = filteredEvents[i].images.find(function(image) {
             return image.ratio === "3_2";
           });
-          // Creating new HTML elements with my search results and adding them to the page
           var eventImageUrl = foundImage.url;
-          // var newLink = $("<a>").attr({
-          //   href: filteredEvents[i].url,
-          //   target: "_blank"});
-          // var newImage = $("<img>").attr("src", eventImageUrl);
-          // var newDiv = $("<div>").attr("data-box", "box"+(i+5));
-          
-          // //Here is where we created itinerary button
-          // var newButton = $("<button>").text("Add to Itinerary").attr('class','itinerary-btn');
-          // var eventTitle = $("<p>").text(event + " " + eventDate).css({display:"block", color: "black"});
-          
-          // newImage.css("width", "300px")
-          
-          // newDiv.append(eventTitle, newLink, newButton);
-          
-          // newLink.append(newImage);
-          // $("#box"+(i+5)).replaceWith(newDiv);
+
+          // Creating a Materialize card with select details from search results for each filtered event and adding them to the page
 
           console.log(eventTime); 
           $("#events-col").append(`
@@ -119,7 +105,7 @@ $("#search-button").on('click', function () {
             <div class="card-content">
               <span class="card-title">${event}</span>
               <p>${eventDate}, ${eventTime}</p>
-              <button class="intinBtn" id="data-${i}">Add to Itinerary</button>
+              <button class="intinBtn btn-small" id="data-${i}">Add to Itinerary</button>
             </div>
           </div>
           `)
@@ -142,7 +128,7 @@ $("#events-col").on("click", ".intinBtn", function() {
     <div class="card-content white-text">
       <span class="card-title">${itinEventTitle}</span>
       <p>${itinEventTime}</p>
-      <button class="removeBtn" data-id=${clicked[0].id}>Remove</button>
+      <button class="removeBtn btn-small" data-id=${clicked[0].id}>Remove</button>
     </div>
   <div>
   `)
@@ -152,35 +138,9 @@ $("#events-col").on("click", ".intinBtn", function() {
 $("#itin-col").on("click", ".removeBtn", function() {
   let itinClicked = $(this);
   console.log(itinClicked);
+  itinClicked[0].offsetParent.remove();
 })
 
-
-
-
-
-
-
-
-
-$(".events").on('click', ".itinerary-btn", function (){
-  var clicked = $(this);
-  console.log(clicked)
-  let siblings = clicked.siblings();
-  var eventText = siblings[0].textContent;
-  var eventItin = $("<p></p>").text(eventText).css({display:"block", color: "white"});
-  $("#itin-box").append(eventItin);
-});
-
-$(".food").on('click', ".itinerary-btn", function (){
-  var clicked = $(this);
-  console.log(clicked);
-  let siblings = clicked.siblings();
-  console.log(siblings[0]);
-  var foodText = siblings[0].textContent;
-  console.log(foodText);
-  var foodItin = $("<p></p>").text(foodText).css({display:"block", color: "white"});
-  $("#itin-box").append(foodItin);
-});
 
 // The click function for our clear button that resets the page
 $("#clear-button").on("click", function(){
