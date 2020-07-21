@@ -76,8 +76,9 @@ $("#search-button").on('click', function () {
 
         for(i = 0; i < 5; i++) {
           var event = filteredEvents[i].name
-          var eventDate = filteredEvents[i].dates.start.localDate
-          var eventTime = filteredEvents[i].dates.start.localTime
+          var eventDate = filteredEvents[i].dates.start.localDate;
+          var eventTime = filteredEvents[i].dates.start.localTime;
+          let formattedTime = moment(`${eventDate} [at] ${eventTime}`).format('MMMM Do YYYY, h:mm a');
           var foundImage = filteredEvents[i].images.find(function(image) {
             return image.ratio === "3_2";
           });
@@ -95,7 +96,7 @@ $("#search-button").on('click', function () {
             </div>
             <div class="card-content">
               <span class="card-title">${event}</span>
-              <p>${eventDate}, ${eventTime}</p>
+              <p>${formattedTime}</p>
               <button class="intinBtn btn-small" id="data-${i}">Add to Itinerary</button>
             </div>
           </div>
